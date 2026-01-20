@@ -774,51 +774,43 @@ window.onload = () => {
                 `;
                 guildsList.appendChild(card);
 
-                // جلب حالة البريميوم (افترض API خارجي)
-                fetch(`https://your-api-domain.com/api/premium?guild_id=${guild.id}`)
-                  .then(res => res.json())
-                  .then(data => {
-                    const statusDiv = document.getElementById(`premium-status-${guild.id}`);
-                    statusDiv.textContent = data.premium ? 'بريميوم مفعل' : 'بريميوم غير مفعل';
-                    statusDiv.classList.add(data.premium ? 'premium-active' : 'premium-inactive');
-                  })
-                  .catch(() => {
-                    const statusDiv = document.getElementById(`premium-status-${guild.id}`);
-                    statusDiv.textContent = 'خطأ في التحميل';
-                    statusDiv.classList.add('premium-inactive');
-                  });
+                // جلب حالة البريميوم من API البوت
+fetch(`https://vantex.orihost.com:3000/api/premium?guild_id=${guild.id}`)
+  .then(res => res.json())
+  .then(data => {
+    const statusDiv = document.getElementById(`premium-status-${guild.id}`);
+    statusDiv.textContent = data.premium ? 'بريميوم مفعل' : 'بريميوم غير مفعل';
+    statusDiv.classList.add(data.premium ? 'premium-active' : 'premium-inactive');
+  })
+  .catch(() => {
+    const statusDiv = document.getElementById(`premium-status-${guild.id}`);
+    statusDiv.textContent = 'خطأ في التحميل';
+    statusDiv.classList.add('premium-inactive');
+  });
 
-                // التحقق إذا كان البوت مضاف (افترض API خارجي للتحقق)
-                fetch(`https://your-api-domain.com/api/is_bot_in_guild?guild_id=${guild.id}`)
-                  .then(res => res.json())
-                  .then(data => {
-                    const addBotBtn = document.getElementById(`add-bot-btn-${guild.id}`);
-                    const dashboardBtn = card.querySelector('.btn-primary');
-                    if (!data.is_in_guild) {
-                      addBotBtn.style.display = 'inline-flex';
-                      dashboardBtn.style.display = 'none';
-                    }
-                  })
-                  .catch(() => {});
-            });
-
-            // إضافة حدث لأزرار الستاتس
-            document.querySelectorAll('.stats-btn').forEach(btn => {
-              btn.addEventListener('click', () => showGuildStats(btn.dataset.guildId, accessToken));
-            });
-        })
-        .catch(err => {
-            console.error(err);
-            document.getElementById('guilds-list').innerHTML =
-                '<p style="text-align:center; color:#ed4245;">حدث خطأ أثناء جلب السيرفرات. حاول مرة أخرى.</p>';
-        });
-        // تنظيف الرابط
-        window.history.replaceState({}, document.title, window.location.pathname);
+// التحقق هل البوت موجود في السيرفر
+fetch(`https://vantex.orihost.com:3000/api/is_bot_in_guild?guild_id=${guild.id}`)
+  .then(res => res.json())
+  .then(data => {
+    const addBotBtn = document.getElementById(`add-bot-btn-${guild.id}`);
+    const dashboardBtn = card.querySelector('.btn-primary');
+    if (!data.is_in_guild) {
+      addBotBtn.style.display = 'inline-flex';
+      dashboardBtn.style.display = 'none';
     }
-};
+  })
+  .catch(() => {});
+});
 
-// دالة عرض إحصائيات السيرفر
-function showGuildStats(guildId, accessToken) {
+
+// إضافة حدث لأزرار الستاتس
+document.querySelectorAll('.stats-btn').forEach(btn => {
+  btn.addEventListener('click', () => showGuildStats(btn.dataset.guildId));
+});
+
+
+// دالة عرض إحصائيات السيرفر (من API البوت فقط)
+function showGuildStats(guildId) {
   const modal = document.getElementById('stats-modal');
   const statsList = document.getElementById('stats-list');
   const overlay = document.getElementById('overlay');
@@ -826,37 +818,30 @@ function showGuildStats(guildId, accessToken) {
   modal.classList.add('show');
   overlay.classList.add('show');
 
-  // جلب معلومات السيرفر من Discord API
-  fetch(`https://discord.com/api/guilds/${guildId}`, {
-    headers: { authorization: `Bearer ${accessToken}` }
-  })
-  .then(res => {
-    if (!res.ok) throw new Error('Failed to fetch guild details');
-    return res.json();
-  })
-  .then(guild => {
-    // جلب عدد الأوامر من API خاص بالبوت (افترض)
-    return fetch(`https://your-api-domain.com/api/commands_count?guild_id=${guildId}`)
-      .then(res => res.json())
-      .then(commandsData => ({ guild, commandsCount: commandsData.count || 0 }));
-  })
-  .then(({ guild, commandsCount }) => {
-    const createdAt = new Date(guild.created_at).toLocaleDateString('ar-EG');
-    statsList.innerHTML = `
-      <li>تاريخ الإنشاء: <strong>${createdAt}</strong></li>
-      <li>عدد الأعضاء: <strong>${guild.approximate_member_count || guild.member_count || 'غير متوفر'}</strong></li>
-      <li>عدد الرولات: <strong>${guild.roles.length}</strong></li>
-      <li>عدد الرومات: <strong>${guild.channels ? guild.channels.length : 'غير متوفر'}</strong></li>
-      <li>عدد الأوامر: <strong>${commandsCount}</strong></li>
-      <li>وصف السيرفر: <strong>${guild.description || 'لا يوجد وصف'}</strong></li>
-      <li>مستوى التحقق: <strong>${guild.verification_level}</strong></li>
-    `;
-  })
-  .catch(err => {
-    console.error(err);
-    statsList.innerHTML = '<li style="color:#ed4245;">حدث خطأ أثناء جلب الإحصائيات.</li>';
-  });
+  // جلب كل الإحصائيات من API البوت
+  fetch(`https://vantex.orihost.com:3000/api/guild_stats?guild_id=${guildId}`)
+    .then(res => {
+      if (!res.ok) throw new Error('Failed to fetch stats');
+      return res.json();
+    })
+    .then(data => {
+      const createdAt = new Date(data.created_at).toLocaleDateString('ar-EG');
+      statsList.innerHTML = `
+        <li>تاريخ الإنشاء: <strong>${createdAt}</strong></li>
+        <li>عدد الأعضاء: <strong>${data.members || 'غير متوفر'}</strong></li>
+        <li>عدد الرولات: <strong>${data.roles || 'غير متوفر'}</strong></li>
+        <li>عدد الرومات: <strong>${data.channels || 'غير متوفر'}</strong></li>
+        <li>عدد الأوامر: <strong>${data.commands || 0}</strong></li>
+        <li>وصف السيرفر: <strong>${data.description || 'لا يوجد وصف'}</strong></li>
+        <li>مستوى التحقق: <strong>${data.verification}</strong></li>
+      `;
+    })
+    .catch(err => {
+      console.error(err);
+      statsList.innerHTML = '<li style="color:#ed4245;">حدث خطأ أثناء جلب الإحصائيات.</li>';
+    });
 }
+
 
 // إغلاق المودال
 function closeStatsModal() {
@@ -867,6 +852,7 @@ function closeStatsModal() {
 }
 
 if (navigator.language.startsWith('en')) toggleLang();
+
 </script>
 </body>
 </html>
