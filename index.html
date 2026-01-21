@@ -15,6 +15,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
   <style>
+    /* نفس الـ CSS السابق بدون تغيير (حذفت فقط الأجزاء المتعلقة بالداشبورد مثل .guild-card و .stats-modal و .user-avatar و .login-btn إلخ) */
     :root {
       --bg: #0d0e12;
       --surface: #16181e;
@@ -86,7 +87,7 @@
       transition: transform 0.4s;
     }
     .logo-img:hover { transform: rotate(15deg) scale(1.1); }
-    .theme-toggle, .lang-toggle, .dashboard-toggle {
+    .theme-toggle, .lang-toggle {
       background: var(--surface2);
       color: var(--text);
       border: 1px solid var(--border);
@@ -96,7 +97,7 @@
       transition: all 0.25s;
       margin-left: 0.8rem;
     }
-    .theme-toggle:hover, .lang-toggle:hover, .dashboard-toggle:hover {
+    .theme-toggle:hover, .lang-toggle:hover {
       background: var(--primary);
       color: white;
       box-shadow: var(--glow);
@@ -167,7 +168,7 @@
       box-shadow: var(--glow);
     }
     .stat-value { font-size: 3rem; font-weight: 900; color: var(--accent); }
-    .cards-grid, .faq-grid, .dashboard-grid {
+    .cards-grid, .faq-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
       gap: 2rem;
@@ -203,7 +204,7 @@
       font-size: 1.1rem;
     }
     .card li i { color: #3ba55c; font-size: 1.5rem; margin-top: 4px; }
-    .copy-btn, .action-btn {
+    .copy-btn {
       background: var(--surface2);
       border: none;
       color: var(--text2);
@@ -214,7 +215,7 @@
       margin-top: 1rem;
       transition: all 0.2s;
     }
-    .action-btn:hover { background: var(--primary); color: white; }
+    .copy-btn:hover { background: var(--primary); color: white; }
     .faq-item {
       background: var(--surface);
       border: 1px solid var(--border);
@@ -257,7 +258,6 @@
     }
     .btn-primary { background: var(--primary); color: white; box-shadow: var(--glow); }
     .btn-success { background: #3ba55c; color: white; }
-    .btn-danger { background: #ed4245; color: white; }
     .btn:hover {
       transform: translateY(-4px);
       box-shadow: 0 14px 36px rgba(0,0,0,0.35);
@@ -294,145 +294,6 @@
       .stats { gap: 1.2rem; }
     }
     .hidden { display: none !important; }
-    .user-avatar {
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
-      border: 4px solid var(--primary);
-      box-shadow: var(--glow);
-      margin: 1rem auto;
-      display: block;
-    }
-    .login-btn {
-      background: #5865f2;
-      color: white;
-      padding: 1rem 2rem;
-      border-radius: 12px;
-      font-size: 1.2rem;
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 12px;
-      box-shadow: var(--glow);
-      transition: all 0.3s;
-    }
-    .login-btn:hover {
-      transform: translateY(-4px);
-      background: #4752c4;
-    }
-    .guild-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 1.4rem 1.6rem;
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-      transition: all 0.25s;
-    }
-    .guild-card:hover {
-      transform: translateY(-3px);
-      box-shadow: var(--glow);
-    }
-    .guild-info {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-    }
-    .guild-icon {
-      width: 64px;
-      height: 64px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 2px solid var(--primary);
-    }
-    .guild-details {
-      flex: 1;
-    }
-    .guild-name {
-      font-weight: 700;
-      font-size: 1.25rem;
-    }
-    .guild-id {
-      color: var(--text2);
-      font-size: 0.95rem;
-      margin-top: 0.3rem;
-    }
-    .guild-buttons {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-top: 1rem;
-      gap: 1rem;
-    }
-    .premium-status {
-      font-weight: 600;
-      color: var(--text2);
-      padding: 0.5rem 1rem;
-      background: var(--surface2);
-      border-radius: 8px;
-      font-size: 0.9rem;
-    }
-    .premium-active { color: #3ba55c; }
-    .premium-inactive { color: #ed4245; }
-    .btn-secondary {
-      background: var(--surface2);
-      color: var(--text);
-      border: 1px solid var(--border);
-    }
-    .btn-secondary:hover {
-      background: var(--primary);
-      color: white;
-    }
-    .stats-modal {
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 2rem;
-      max-width: 500px;
-      width: 90%;
-      z-index: 10000;
-      box-shadow: var(--glow);
-      display: none;
-    }
-    .stats-modal.show { display: block; }
-    .stats-modal h3 {
-      color: var(--primary);
-      margin-bottom: 1.5rem;
-    }
-    .stats-modal ul {
-      list-style: none;
-      display: grid;
-      gap: 1rem;
-    }
-    .stats-modal li {
-      display: flex;
-      justify-content: space-between;
-      font-size: 1.1rem;
-    }
-    .stats-modal li strong { color: var(--accent); }
-    .close-modal {
-      position: absolute;
-      top: 1rem;
-      right: 1rem;
-      background: none;
-      border: none;
-      color: var(--text2);
-      font-size: 1.5rem;
-      cursor: pointer;
-    }
-    .overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.5);
-      z-index: 9999;
-      display: none;
-    }
-    .overlay.show { display: block; }
   </style>
 </head>
 <body data-theme="dark">
@@ -445,7 +306,6 @@
   <div>
     <button class="theme-toggle" id="themeToggle" aria-label="تبديل الوضع">☀️</button>
     <button class="lang-toggle" id="langBtn">English</button>
-  <button class="dashboard-toggle" id="dashboard">dashboard</button>
   </div>
 </nav>
 <main>
@@ -454,7 +314,6 @@
       <img src="https://i.ibb.co/wZ6hvfG0/image.jpg" alt="Vantex Logo" class="hero-logo">
       <h1 data-ar>الأوراق القانونية – Vantex</h1>
       <h1 data-en style="display:none">Vantex • Legal & Privacy</h1>
- 
       <p class="subtitle" data-ar>حماية • خصوصية • شفافية كاملة</p>
       <p class="subtitle" data-en style="display:none">Protection • Privacy • Full Transparency</p>
     </section>
@@ -545,64 +404,14 @@
       </div>
     </section>
   </div>
-  <div id="dashboard-content" class="hidden">
-    <section class="hero" style="margin-bottom: 4rem; text-align: center;">
-      <h1 style="margin-bottom: 1.5rem;">لوحة تحكم Vantex</h1>
-      <p class="subtitle" style="animation: none; white-space: normal; border: none; font-size: 1.3rem;">
-        مرحباً! الإعدادات والسيرفرات قيد التطوير حاليًا
-      </p>
-    </section>
-    <div id="not-logged-in" style="text-align: center; padding: 6rem 1rem;">
-      <i class="fa-solid fa-lock fa-6x" style="color: var(--accent); margin-bottom: 2rem;"></i>
-      <h2 style="margin-bottom: 1.5rem;">قم بتسجيل الدخول بحساب ديسكورد</h2>
-      <p style="color: var(--text2); margin-bottom: 2.5rem; max-width: 680px; margin-left: auto; margin-right: auto; line-height: 1.6;">
-        للوصول إلى لوحة التحكم، تحتاج تسجيل الدخول باستخدام حساب ديسكورد الخاص بك.
-      </p>
-      <a href="https://discord.com/oauth2/authorize?client_id=1423325443393589290&response_type=token&redirect_uri=https%3A%2F%2F1gz22.github.io%2FVantex-Bot-website%2F&scope=identify+guilds"
-         class="login-btn">
-        <i class="fa-brands fa-discord"></i> تسجيل الدخول بديسكورد
-      </a>
-    </div>
-    <div id="logged-in-view" class="hidden" style="text-align: center; padding: 6rem 1rem;">
-      <img src="https://i.ibb.co/wZ6hvfG0/image.jpg" alt="User Avatar" class="user-avatar">
-      <h2 id="user-name">جاري التحميل...</h2>
-      <p style="color: var(--text2); margin: 1.5rem 0 3rem;" id="user-id">ID: ...</p>
-    
-      <div style="background: var(--surface2); border-radius: 16px; padding: 2.5rem; max-width: 800px; margin: 0 auto 3rem; border: 1px solid var(--border);">
-        <h3 style="margin-bottom: 1.5rem; color: var(--accent);">الحالة الحالية</h3>
-        <div id="guilds-section">
-          <h4 style="margin: 2rem 0 1.2rem; color: var(--primary);">السيرفرات المتاحة لك</h4>
-         
-          <div id="guilds-list" style="display: grid; gap: 1.2rem;">
-            <div class="loading-text" style="text-align: center; color: var(--text2); padding: 2rem;">
-              جاري تحميل السيرفرات...
-            </div>
-          </div>
-        </div>
-      </div>
-      <button id="logout-btn" class="btn btn-danger" style="font-size: 1.1rem; padding: 1rem 2.5rem;">
-        <i class="fa-solid fa-right-from-bracket"></i> تسجيل الخروج
-      </button>
-    </div>
-    <div style="text-align: center; margin: 5rem 0;">
-      <button id="back-to-legal-from-dash" class="btn btn-primary">
-        <i class="fa-solid fa-arrow-right-from-bracket fa-flip-horizontal"></i> العودة للصفحة الرئيسية
-      </button>
-    </div>
-  </div>
 </main>
-<div id="overlay" class="overlay" onclick="closeStatsModal()"></div>
-<div id="stats-modal" class="stats-modal">
-  <button class="close-modal" onclick="closeStatsModal()"><i class="fa-solid fa-times"></i></button>
-  <h3>إحصائيات السيرفر</h3>
-  <ul id="stats-list"></ul>
-</div>
 <footer>
   <p data-ar>© 2025–2026 فريق Dara3 • بواسطة Embaby (1gZ)</p>
   <p data-en style="display:none">© 2025–2026 Dara3 Team • By Embaby (1gZ)</p>
   <p style="margin-top:1rem; font-size:0.9rem;">Last updated: January 18, 2026</p>
 </footer>
 <button id="back-to-top" aria-label="العودة للأعلى"><i class="fa-solid fa-arrow-up"></i></button>
+
 <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
 <script>
 // Particles
@@ -623,6 +432,7 @@ particlesJS("particles-js", {
   },
   retina_detect: true
 });
+
 // Theme Toggle
 const themeToggle = document.getElementById('themeToggle');
 const currentTheme = localStorage.getItem('theme') || 'dark';
@@ -634,6 +444,7 @@ themeToggle.addEventListener('click', () => {
   localStorage.setItem('theme', newTheme);
   themeToggle.textContent = newTheme === 'dark' ? '☀️' : '🌙';
 });
+
 // Language Toggle
 const langBtn = document.getElementById('langBtn');
 const html = document.documentElement;
@@ -654,6 +465,7 @@ function toggleLang() {
   });
 }
 langBtn.addEventListener('click', toggleLang);
+
 // FAQ Accordion
 document.querySelectorAll('.faq-question').forEach(btn => {
   btn.addEventListener('click', () => {
@@ -661,6 +473,7 @@ document.querySelectorAll('.faq-question').forEach(btn => {
     item.classList.toggle('active');
   });
 });
+
 // Copy Section
 function copySection(btn) {
   const card = btn.closest('.card');
@@ -671,200 +484,13 @@ function copySection(btn) {
     setTimeout(() => btn.textContent = 'نسخ القسم', 2000);
   });
 }
+
 // Back to Top
 const backToTop = document.getElementById('back-to-top');
 window.addEventListener('scroll', () => {
   backToTop.classList.toggle('show', window.scrollY > 400);
 });
 backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
-// Dashboard Logic
-const dashboardToggle = document.getElementById('dashboardToggle');
-const legalContent = document.getElementById('legal-content');
-const dashboardContent = document.getElementById('dashboard-content');
-const backToLegal = document.getElementById('back-to-legal-from-dash');
-const notLoggedIn = document.getElementById('not-logged-in');
-const loggedInView = document.getElementById('logged-in-view');
-const logoutBtn = document.getElementById('logout-btn');
-dashboardToggle.addEventListener('click', () => {
-  legalContent.classList.add('hidden');
-  dashboardContent.classList.remove('hidden');
-});
-backToLegal.addEventListener('click', () => {
-  dashboardContent.classList.add('hidden');
-  legalContent.classList.remove('hidden');
-});
-logoutBtn.addEventListener('click', () => {
-  localStorage.removeItem('discord_access_token');
-  location.href = 'https://1gz22.github.io/Vantex-Bot-website/';
-});
-// تفعيل تسجيل الدخول وجلب البيانات
-window.onload = () => {
-    const fragment = new URLSearchParams(window.location.hash.slice(1));
-    let accessToken = fragment.get('access_token') || localStorage.getItem('discord_access_token');
-    if (accessToken) {
-        localStorage.setItem('discord_access_token', accessToken);
-   
-        // تبديل الواجهة
-        legalContent.classList.add('hidden');
-        dashboardContent.classList.remove('hidden');
-        notLoggedIn.classList.add('hidden');
-        loggedInView.classList.remove('hidden');
-        // جلب بيانات المستخدم
-        fetch('https://discord.com/api/users/@me', {
-            headers: { authorization: `Bearer ${accessToken}` }
-        })
-        .then(res => res.json())
-        .then(user => {
-            document.getElementById('user-name').innerText = `${user.username}#${user.discriminator}`;
-            document.getElementById('user-id').innerText = `ID: ${user.id}`;
-            document.querySelector('.user-avatar').src = `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png`;
-        })
-        .catch(() => {
-            localStorage.removeItem('discord_access_token');
-            location.reload();
-        });
-        // جلب السيرفرات
-        fetch('https://discord.com/api/users/@me/guilds', {
-            headers: { authorization: `Bearer ${accessToken}` }
-        })
-        .then(res => {
-            if (!res.ok) throw new Error('Failed to fetch guilds');
-            return res.json();
-        })
-        .then(guilds => {
-            const guildsList = document.getElementById('guilds-list');
-            guildsList.innerHTML = '';
-            if (guilds.length === 0) {
-                guildsList.innerHTML = '<p style="text-align:center; color:var(--text2);">لا توجد سيرفرات تملك فيها صلاحيات إدارية.</p>';
-                return;
-            }
-            const manageableGuilds = guilds.filter(g => g.owner || (g.permissions & 0x8) === 0x8);
-            if (manageableGuilds.length === 0) {
-                guildsList.innerHTML = '<p style="text-align:center; color:var(--text2);">لا توجد سيرفرات يمكنك إدارتها حالياً.</p>';
-                return;
-            }
-            manageableGuilds.forEach(guild => {
-                const card = document.createElement('div');
-                card.classList.add('guild-card');
-                card.innerHTML = `
-                    <div class="guild-info">
-                        <img src="${guild.icon ? `https://cdn.discordapp.com/icons/${guild.id}/${guild.icon}.png?size=64` : 'https://discord.com/assets/dd4dbc0016779df1378e7812eabaa04d.png'}"
-                             class="guild-icon" alt="${guild.name}">
-                        <div class="guild-details">
-                            <div class="guild-name">${guild.name}</div>
-                            <div class="guild-id">ID: ${guild.id}</div>
-                        </div>
-                    </div>
-                    <div class="guild-buttons">
-                        <div id="premium-status-${guild.id}" class="premium-status">جاري التحميل...</div>
-                        <div style="display: flex; gap: 0.8rem;">
-                            <button class="btn btn-secondary stats-btn" data-guild-id="${guild.id}" style="padding:0.8rem 1.5rem; font-size:1rem;">
-                                <i class="fa-solid fa-chart-bar"></i> ستاتس
-                            </button>
-                            <a href="https://1gz22.github.io/Vantex-Bot-website/dashboard.html?guild=${guild.id}" 
-                               class="btn btn-primary" style="padding:0.8rem 1.5rem; font-size:1rem;">
-                                <i class="fa-solid fa-cog"></i> لوحة التحكم
-                            </a>
-                            <a href="https://discord.com/oauth2/authorize?client_id=1423325443393589290&permissions=8&scope=bot&guild_id=${guild.id}&disable_guild_select=true"
-                               target="_blank" class="btn btn-success" style="padding:0.8rem 1.5rem; font-size:1rem; display: none;" id="add-bot-btn-${guild.id}">
-                                <i class="fa-brands fa-discord"></i> إضافة البوت
-                            </a>
-                        </div>
-                    </div>
-                `;
-                guildsList.appendChild(card);
-
-                // جلب حالة البريميوم (افترض API خارجي)
-                fetch(`https://your-api-domain.com/api/premium?guild_id=${guild.id}`)
-                  .then(res => res.json())
-                  .then(data => {
-                    const statusDiv = document.getElementById(`premium-status-${guild.id}`);
-                    statusDiv.textContent = data.premium ? 'بريميوم مفعل' : 'بريميوم غير مفعل';
-                    statusDiv.classList.add(data.premium ? 'premium-active' : 'premium-inactive');
-                  })
-                  .catch(() => {
-                    const statusDiv = document.getElementById(`premium-status-${guild.id}`);
-                    statusDiv.textContent = 'خطأ في التحميل';
-                    statusDiv.classList.add('premium-inactive');
-                  });
-
-                // التحقق إذا كان البوت مضاف (افترض API خارجي للتحقق)
-                fetch(`https://your-api-domain.com/api/is_bot_in_guild?guild_id=${guild.id}`)
-                  .then(res => res.json())
-                  .then(data => {
-                    const addBotBtn = document.getElementById(`add-bot-btn-${guild.id}`);
-                    const dashboardBtn = card.querySelector('.btn-primary');
-                    if (!data.is_in_guild) {
-                      addBotBtn.style.display = 'inline-flex';
-                      dashboardBtn.style.display = 'none';
-                    }
-                  })
-                  .catch(() => {});
-            });
-
-            // إضافة حدث لأزرار الستاتس
-            document.querySelectorAll('.stats-btn').forEach(btn => {
-              btn.addEventListener('click', () => showGuildStats(btn.dataset.guildId, accessToken));
-            });
-        })
-        .catch(err => {
-            console.error(err);
-            document.getElementById('guilds-list').innerHTML =
-                '<p style="text-align:center; color:#ed4245;">حدث خطأ أثناء جلب السيرفرات. حاول مرة أخرى.</p>';
-        });
-        // تنظيف الرابط
-        window.history.replaceState({}, document.title, window.location.pathname);
-    }
-};
-
-// دالة عرض إحصائيات السيرفر
-function showGuildStats(guildId, accessToken) {
-  const modal = document.getElementById('stats-modal');
-  const statsList = document.getElementById('stats-list');
-  const overlay = document.getElementById('overlay');
-  statsList.innerHTML = '<li>جاري التحميل...</li>';
-  modal.classList.add('show');
-  overlay.classList.add('show');
-
-  // جلب معلومات السيرفر من Discord API
-  fetch(`https://discord.com/api/guilds/${guildId}`, {
-    headers: { authorization: `Bearer ${accessToken}` }
-  })
-  .then(res => {
-    if (!res.ok) throw new Error('Failed to fetch guild details');
-    return res.json();
-  })
-  .then(guild => {
-    // جلب عدد الأوامر من API خاص بالبوت (افترض)
-    return fetch(`https://your-api-domain.com/api/commands_count?guild_id=${guildId}`)
-      .then(res => res.json())
-      .then(commandsData => ({ guild, commandsCount: commandsData.count || 0 }));
-  })
-  .then(({ guild, commandsCount }) => {
-    const createdAt = new Date(guild.created_at).toLocaleDateString('ar-EG');
-    statsList.innerHTML = `
-      <li>تاريخ الإنشاء: <strong>${createdAt}</strong></li>
-      <li>عدد الأعضاء: <strong>${guild.approximate_member_count || guild.member_count || 'غير متوفر'}</strong></li>
-      <li>عدد الرولات: <strong>${guild.roles.length}</strong></li>
-      <li>عدد الرومات: <strong>${guild.channels ? guild.channels.length : 'غير متوفر'}</strong></li>
-      <li>عدد الأوامر: <strong>${commandsCount}</strong></li>
-      <li>وصف السيرفر: <strong>${guild.description || 'لا يوجد وصف'}</strong></li>
-      <li>مستوى التحقق: <strong>${guild.verification_level}</strong></li>
-    `;
-  })
-  .catch(err => {
-    console.error(err);
-    statsList.innerHTML = '<li style="color:#ed4245;">حدث خطأ أثناء جلب الإحصائيات.</li>';
-  });
-}
-
-// إغلاق المودال
-function closeStatsModal() {
-  const modal = document.getElementById('stats-modal');
-  const overlay = document.getElementById('overlay');
-  modal.classList.remove('show');
-  overlay.classList.remove('show');
-}
 
 if (navigator.language.startsWith('en')) toggleLang();
 </script>
